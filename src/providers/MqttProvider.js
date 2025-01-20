@@ -28,16 +28,12 @@ class MqttProvider {
         });
     };
 
-    publishNewExercise(exerciseVideoUrl, comp_id) {
-        console.log("HERE", exerciseVideoUrl, comp_id)
-        let rawMessage = {
-            url: exerciseVideoUrl,
-            comp_id: comp_id
-        }
-        const topic = 'exercise/url';
-        const message = JSON.stringify(rawMessage);
+    publishNewExercise(exercise) {
+        console.log("HERE", exercise)
+
+        const topic = 'newexercise';
     
-        this.client.publish(topic, message, { qos: 2 }, (error) => {
+        this.client.publish(topic, exercise, { qos: 2 }, (error) => {
             if (error) {
                 console.error('Publish error:', error);
             } else {

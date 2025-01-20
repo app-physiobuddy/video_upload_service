@@ -15,10 +15,18 @@ router.get('/', (req, res) => {
 
 
 // IMPLEMENTADOS
-router.post("/upload-video/companies/:user_id", (req, res) => {
+router.post("/therapists/:therapist_user_id/companies/:company_entity_id/exercises", (req, res) => {
+
     controller.uploadVideo(req, res)
 })
 
+ router.get('/videos/:comp_id', (req, res) => {
+    controller.listFiles(req, res)
+  });
+
+  router.get('/videos/:comp_id/:filename', (req, res) => {
+    controller.serveVideo(req, res)
+  });
 
 
 

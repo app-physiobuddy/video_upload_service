@@ -4,6 +4,7 @@ const express = require('express');
 const router = require("./adapters/routes");
 require('dotenv').config();
 const erroHandler = require("./utils/errors/errorHandler")
+const path = require('path');
 
 
 
@@ -16,7 +17,7 @@ app.use(express.json());
 
 // Mount the routes
 app.use('', router);
-
+app.use('/videos', express.static(path.join(__dirname, 'videos')));
 app.use(erroHandler);
 
 const APP_PORT = process.env.APP_PORT;
