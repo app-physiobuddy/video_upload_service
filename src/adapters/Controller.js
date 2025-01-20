@@ -2,9 +2,13 @@ require("dotenv").config();
 const multer = require("multer");
 const ErrorTypes = require("../utils/errors/ErrorTypes");
 const path = require("path");
-const  mqtt = require("../providers/MqttProvider");
+const mqttProvider = require("../app")
 
 class Controller {
+
+    constructor(mqttProvider) {
+        this.mqttProvider = mqttProvider
+    }
     async uploadVideo(req, res) {
         const { user_id } = req.params;
 
@@ -48,7 +52,7 @@ class Controller {
                 const fileUrl = `${req.protocol}://${req.get('host')}/videos/${user_id}/${req.file.filename}`;
                 const url2 = `${user_id}/${req.file.filename}`
                 console.log(fileUrl);
-                mqtt.publishNewPlan2Patient(fileUrl, user_id);
+                this.mqttProvider.publishNewExercise(String(fileUrl), user_id);
 
                 res.status(200).json({ url: url2, user_id });
             } catch (error) {

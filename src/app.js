@@ -6,6 +6,8 @@ require('dotenv').config();
 const erroHandler = require("./utils/errors/errorHandler")
 
 
+
+
 const app = express();
 app.use(express.json());
 
@@ -21,3 +23,4 @@ const APP_PORT = process.env.APP_PORT;
 app.listen(APP_PORT, () => {
     console.log(`JS Video Upload service is running on http://localhost:${APP_PORT}`);
 });
+

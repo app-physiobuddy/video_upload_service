@@ -1,7 +1,10 @@
 const router = require('express').Router()
 
 const Contoller = require("./Controller")
-const controller = new Contoller()
+const MqttProvider = require("../providers/MqttProvider");
+
+const mqttProvider = new MqttProvider();
+const controller = new Contoller(mqttProvider)
 
 
 
